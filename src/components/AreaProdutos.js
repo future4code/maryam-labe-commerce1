@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const ContainerProdutos = styled.div`
     display: flex;
     flex-direction: column;
@@ -26,87 +25,50 @@ const ImagemDosProdutos = styled.img`
     width: 250px;
 `
 
-
-
-
 export default class AreaProdutos extends React.Component {
 
-    state = {
-    Produtos: [
-        {
-        id: 1,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 2,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 3,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 4,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 5,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-    ]
-    };
 
     render() {
-        const componentes = this.state.Produtos.map((item) => {
+        const componentes = this.props.produtos
+        .filter(produto => {
+            return produto.name.toLowerCase().includes(this.props.busca.toLowerCase())
+        })
+        .filter(produto => {
+            return this.props.minPrice === "" || produto.value >= this.props.minPrice
+        })
+        .filter(produto => {
+            return this.props.maxPrice === "" || produto.value <= this.props.maxPrice
+        })
+        .sort((produtoAtual, proximoProduto) => {
+            return this.props.order * (produtoAtual.value - proximoProduto.value)
+        })
+        .map((item) => {
             return (
                 <ContainerProduto key={item.id}>
                     <p>{item.name}</p>
                     <ImagemDosProdutos src={item.imageUrl} />
-                    <p>{item.value}</p>
-                    <button>Adicionar ao Carrinho</button>
+                    <p>R$ {item.value},00</p>
+                    <button onClick={()=> this.props.adicionaAoCarrinho(item.id)}>Adicionar ao Carrinho</button>
                 </ContainerProduto>
             )
         })
-        console.log(this.state.Produtos.length)
-
-        // //Função para ordenar os produtos em ordem Crescente
-        // const ordenaProdutosCrescente = this.state.Produtos.map((produtos) => {
-        //     produtos.value.sort((a, b) => {
-        //         if (a > b) {
-        //             return 1;}
-        //         if (a < b) {
-        //             return -1;}
-        //         return 0
-        //     })
-        //     return produtos
-        // })
-
-        // //Função para ordenar os produtos em ordem Decrescente
-        // const ordenaProdutosCrescente = this.state.Produtos.map((produtos) => {
-        //     produtos.value.sort((a, b) => {
-        //         if (a < b) {
-        //             return 1;}
-        //         if (a > b) {
-        //             return -1;}
-        //         return 0
-        //     })
-        //     return produtos
-        // })
 
       return (
         <ContainerProdutos>
             <Header>
-                <p>Quantidade dos Produtos: {this.state.Produtos.length}</p>  
+                <p>Quantidade dos Produtos: {this.props.produtos.length}</p>
+                 <div>
+                    
+                    <p>Preço: </p>
+                     <select
+                        name="order"
+                        value={this.props.order}
+                        onChange={this.props.atualizaOrdem}
+                    >
+                        <option value={1}>Crescente</option>
+                        <option value={-1}>Decrescente</option>
+                    </select>
+                 </div>
             </Header>
             <AreaDosProdutos>
                 {componentes}
