@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const ContainerCarrinho = styled.div`
     display:flex;
     flex-direction: column;
@@ -30,9 +31,11 @@ const ItemDaListaDeProdutos= styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin: 8px 12px;
+    align-items: center;
     p{
       margin: 0;
       display: inline;
+      font-size: 24px;
     }
     `
 
@@ -50,6 +53,8 @@ text-align: center;
 justify-content: center;
 outline: 0;`
 
+
+
 export default class MenuCarrinho extends React.Component {
 
   state = {
@@ -59,8 +64,26 @@ export default class MenuCarrinho extends React.Component {
       id: 1,
       quantidade: 3,
       produto: 'panos',
-      valorTotal: '3000',
-    }
+      valor: '3000',
+    },
+    {
+      id: 2,
+      quantidade: 3,
+      produto: 'cartas',
+      valor: '310',
+    },
+    {
+      id: 3,
+      quantidade: 3,
+      produto: 'pratos',
+      valor: '30',
+    },
+    {
+      id: 4,
+      quantidade: 3,
+      produto: 'bananas',
+      valor: '300',
+    },
     ],
 
     quantidade:'',
@@ -73,14 +96,10 @@ export default class MenuCarrinho extends React.Component {
 
     if(produtoSelecionado.quantidade === 1){
 
-      console.log("entrou1")
-
       const remocaoDeProduto = this.state.listaDeProdutos.filter(produtoAnalisado => {
 
         if ( produtoSelecionado.id !== produtoAnalisado.id ){
 
-          console.log(produtoSelecionado.id, "e", produtoAnalisado.id)
-          console.log("entrou2")
           return true
     
         } else {
@@ -94,8 +113,6 @@ export default class MenuCarrinho extends React.Component {
         this.setState({ listaDeProdutos: remocaoDeProduto })
 
     } else {
-
-      console.log("entrou 4")
 
       const listaDeProdutos = this.state.listaDeProdutos.map(produto => {
 
@@ -122,8 +139,8 @@ export default class MenuCarrinho extends React.Component {
         this.setState({ listaDeProdutos: listaDeProdutos })
     
   }
-  };
 
+  };
   render() {
 
     const produtosNoCarrinho = this.state.listaDeProdutos.map((produtos) =>{
@@ -132,7 +149,7 @@ export default class MenuCarrinho extends React.Component {
           
         <ItemDaListaDeProdutos>
 
-          <p>{produtos.quantidade}</p>
+          <p>{produtos.quantidade}x</p>
 
           <p>{produtos.produto}</p>
 
@@ -152,13 +169,34 @@ export default class MenuCarrinho extends React.Component {
 
     });
 
+    function valorTotal (listaDeProdutos) {
+
+    const valorTotal = listaDeProdutos.reduce(somaTotal, 0)
+
+    function somaTotal(total, item) {
+
+      return total + (item.valor * item.quantidade)
+
+     };
+
+     if (valorTotal === 0){
+
+      return "0.00"
+
+     } else{
+
+     return valorTotal
+
+    }
+    };
+
     return (
+
       <ContainerCarrinho>
 
         <DisposicaoDaListaDeProdutos>
 
           <h1>Carrinho:</h1>
-
           {produtosNoCarrinho}
 
         </DisposicaoDaListaDeProdutos>
@@ -166,11 +204,12 @@ export default class MenuCarrinho extends React.Component {
           <ValorTotal>
 
             <p>Valor Total:</p>
-            {this.state.valorTotal}
+            <p>R${valorTotal(this.state.listaDeProdutos)}</p>
 
           </ValorTotal>
 
       </ContainerCarrinho>
+
     );
   }
 }

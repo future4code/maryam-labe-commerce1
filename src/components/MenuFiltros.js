@@ -10,7 +10,6 @@ padding: 60px 60px;
 const InputContainer = styled.div`
 display: flex;
 flex-direction: column;
-
 `
 
 export default class MenuFiltros extends React.Component {
@@ -22,6 +21,8 @@ export default class MenuFiltros extends React.Component {
                 <p>Valor mínimo</p>
                 <input
                 type="number"
+                value={this.props.minPrice}
+                onChange={this.props.atualizaPrecoMin}
                 />
                 </InputContainer>
 
@@ -29,12 +30,16 @@ export default class MenuFiltros extends React.Component {
                 <p>Valor máximo</p>
                 <input
                 type="number"
+                value={this.props.maxPrice}
+                onChange={this.props.atualizaPrecoMax}
                 />    
                 </InputContainer>
                 
                 <InputContainer>
                 <p>Busca por nome</p>
                 <input
+                value={this.props.busca}
+                onChange={this.props.atualizaBusca}
                 />
                 </InputContainer>
         </ContainerFiltros>

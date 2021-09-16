@@ -27,86 +27,84 @@ const ImagemDosProdutos = styled.img`
 
 export default class AreaProdutos extends React.Component {
 
-    state = {
-    Produtos: [
-        {
-        id: 1,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 2,
-        name: "Foguete da Missão Apollo 10",
-        value: 1000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 3,
-        name: "Foguete da Missão Apollo 12",
-        value: 100.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 4,
-        name: "Foguete da Missão Apollo 13",
-        value: 10.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-        {
-        id: 5,
-        name: "Foguete da Missão Apollo 14",
-        value: 1.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
-        },
-    ],
-        busca: "",
-        minPrice: "",
-        maxPrice: "",
-        parametroBusca: "price",
-        order: 1
-    };
+    // state = {
+    // Produtos: [
+    //     {
+    //     id: 1,
+    //     name: "Foguete da Missão Apollo 11",
+    //     value: 10000.0,
+    //     imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+    //     },
+    //     {
+    //     id: 2,
+    //     name: "Foguete da Missão Apollo 10",
+    //     value: 1000.0,
+    //     imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+    //     },
+    //     {
+    //     id: 3,
+    //     name: "Foguete da Missão Apollo 12",
+    //     value: 100.0,
+    //     imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+    //     },
+    //     {
+    //     id: 4,
+    //     name: "Foguete da Missão Apollo 13",
+    //     value: 10.0,
+    //     imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+    //     },
+    //     {
+    //     id: 5,
+    //     name: "Foguete da Missão Apollo 14",
+    //     value: 1.0,
+    //     imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+    //     },
+    // ],
+    //     busca: "",
+    //     minPrice: "",
+    //     maxPrice: "",
+    //     parametroBusca: "price",
+    //     order: 1
+    // };
 
-    atualizaBusca = (evento) => {
-        this.setState({
-            busca: evento.target.value
-        })
-    }
+    // atualizaBusca = (evento) => {
+    //     this.setState({
+    //         busca: evento.target.value
+    //     })
+    // }
 
-    atualizaPrecoMin = (evento) => {
-        this.setState({
-            minPrice: evento.target.value
-        })
-    }
+    // atualizaPrecoMin = (evento) => {
+    //     this.setState({
+    //         minPrice: evento.target.value
+    //     })
+    // }
 
-    atualizaPrecoMax = (evento) => {
-        this.setState({
-            maxPrice: evento.target.value
-        })
-    }
+    // atualizaPrecoMax = (evento) => {
+    //     this.setState({
+    //         maxPrice: evento.target.value
+    //     })
+    // }
 
-    atualizaOrdem = (evento) => {
-        this.setState({
-            order: evento.target.value
-        })
-    }
-
+    // atualizaOrdem = (evento) => {
+    //     this.setState({
+    //         order: evento.target.value
+    //     })
+    // }
 
     render() {
-        const componentes = this.state.Produtos
+        const componentes = this.props.produtos
         .filter(produto => {
-            return produto.name.toLowerCase().includes(this.state.busca.toLowerCase())
+            return produto.name.toLowerCase().includes(this.props.busca.toLowerCase())
         })
         .filter(produto => {
-            return this.state.minPrice === "" || produto.value >= this.state.minPrice
+            return this.props.minPrice === "" || produto.value >= this.props.minPrice
         })
         .filter(produto => {
-            return this.state.maxPrice === "" || produto.value <= this.state.maxPrice
+            return this.props.maxPrice === "" || produto.value <= this.props.maxPrice
         })
         .sort((produtoAtual, proximoProduto) => {
-            return this.state.order * (produtoAtual.value - proximoProduto.value)
+            return this.props.order * (produtoAtual.value - proximoProduto.value)
         })
-
         .map((item) => {
             return (
                 <ContainerProduto key={item.id}>
@@ -121,32 +119,14 @@ export default class AreaProdutos extends React.Component {
       return (
         <ContainerProdutos>
             <Header>
-                <p>Quantidade dos Produtos: {this.state.Produtos.length}</p>
+                <p>Quantidade dos Produtos: {this.props.produtos.length}</p>
                  <div>
-                    <input 
-                     placeholder="Pesquisa"
-                     value={this.state.busca}
-                     onChange={this.atualizaBusca}
-                     />
-
-                    <input
-                     type="number" 
-                     placeholder="Preço Mínimo"
-                     value={this.state.minPrice}
-                     onChange={this.atualizaPrecoMin}
-                     />
-
-                    <input
-                     type="number"  
-                     placeholder="Preço Máximo"
-                     value={this.state.maxPrice}
-                     onChange={this.atualizaPrecoMax}
-                     />
+                    
                     <p>Preço: </p>
                      <select
                         name="order"
-                        value={this.state.order}
-                        onChange={this.atualizaOrdem}
+                        value={this.props.order}
+                        onChange={this.props.atualizaOrdem}
                     >
                         <option value={1}>Crescente</option>
                         <option value={-1}>Decrescente</option>
