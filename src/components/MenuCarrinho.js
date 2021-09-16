@@ -66,55 +66,55 @@ export default class MenuCarrinho extends React.Component {
 
   };
 
-  removerProduto = (produtoSelecionado) => {
+  // removerProduto = (produtoSelecionado) => {
 
-    if(produtoSelecionado.quantidade === 1){
+  //   if(produtoSelecionado.quantidade === 1){
 
-      const remocaoDeProduto = this.props.Produtos.filter(produtoAnalisado => {
+  //     const remocaoDeProduto = this.props.Produtos.filter(produtoAnalisado => {
 
-        if ( produtoSelecionado.id !== produtoAnalisado.id ){
+  //       if ( produtoSelecionado.id !== produtoAnalisado.id ){
 
-          return true
+  //         return true
     
-        } else {
+  //       } else {
     
-          return false
+  //         return false
     
-        }
+  //       }
     
-      })
+  //     })
     
-        this.setState({ listaDeProdutos: remocaoDeProduto })
+  //       this.setState({ this.props.carrinho: remocaoDeProduto })
 
-    } else {
+  //   } else {
 
-      const listaDeProdutos = this.props.carrinho.map(produto => {
+  //     const listaDeProdutos = this.props.carrinho.map(produto => {
 
-        if (produtoSelecionado.id === produto.id ){
+  //       if (produtoSelecionado.id === produto.id ){
     
-          const objetoSelecionado = {
+  //         const objetoSelecionado = {
     
-            ...produto,
+  //           ...produto,
     
-            quantidade: produto.quantidade - 1
+  //           quantidade: produto.quantidade - 1
     
-          }
+  //         }
     
-          return objetoSelecionado
+  //         return objetoSelecionado
     
-        } else {
+  //       } else {
     
-          return produto
+  //         return produto
     
-        }
+  //       }
     
-      })
+  //     })
     
-        this.setState({ listaDeProdutos: listaDeProdutos })
+  //       this.setState({ carrinho: listaDeProdutos })
     
-  }
+  // }
 
-  };
+  //};
   render() {
 
     const produtosNoCarrinho = this.props.carrinho.map((produtos) =>{
@@ -123,7 +123,7 @@ export default class MenuCarrinho extends React.Component {
           
         <ItemDaListaDeProdutos>
 
-          <p>{produtos.quantidade}x</p>
+          {/* <p>{produtos.quantidade}x</p> */}
 
           <p>{produtos.name}</p>
 
@@ -172,6 +172,7 @@ export default class MenuCarrinho extends React.Component {
 
           <h1>Carrinho:</h1>
           {produtosNoCarrinho}
+          <p>{this.props.carrinho.name}</p>
 
         </DisposicaoDaListaDeProdutos>
 

@@ -47,27 +47,6 @@ export default class App extends React.Component {
         },
     ],
 
-    Carrinho:[
-      {
-        name: "foguete",
-        quantidade: "2",
-        valor: "2000"
-
-      },
-      {
-        name: "foguete2",
-        quantidade: "2",
-        valor: "2000"
-
-      },
-      {
-        name: "foguete3",
-        quantidade: "2",
-        valor: "2000"
-
-      },
-      
-    ],
         busca: "",
         minPrice: "",
         maxPrice: "",
@@ -110,21 +89,8 @@ export default class App extends React.Component {
   
     }) 
     this.state.carrinho.push(itemCarrinho)
-    console.log(itemCarrinho)
     console.log(this.state.carrinho)
   }
-
-  // onClickRemoverPessoa = (indexParaRemover) => {
-  //   console.log("REMOVENDO", indexParaRemover);
-  //   const copiaPessoas = this.state.pessoas.filter(
-  //     (cadaPessoa, indexCadaPessoa) => {
-  //       if (indexParaRemover === indexCadaPessoa) {
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     }
-  //   );
 
   render() {
 
@@ -156,7 +122,7 @@ export default class App extends React.Component {
         </div>
         <div>
           <MenuCarrinho
-          carrinho = {this.state.Carrinho} 
+          carrinho = {this.state.carrinho} 
           // Produtos = {this.state.Produtos}
 
           />
