@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 
+
 const ContainerCarrinho = styled.div`
     display:flex;
     flex-direction: column;
@@ -59,33 +60,6 @@ export default class MenuCarrinho extends React.Component {
 
   state = {
 
-    listaDeProdutos:[
-      {
-      id: 1,
-      quantidade: 3,
-      produto: 'panos',
-      valor: '3000',
-    },
-    {
-      id: 2,
-      quantidade: 3,
-      produto: 'cartas',
-      valor: '310',
-    },
-    {
-      id: 3,
-      quantidade: 3,
-      produto: 'pratos',
-      valor: '30',
-    },
-    {
-      id: 4,
-      quantidade: 3,
-      produto: 'bananas',
-      valor: '300',
-    },
-    ],
-
     quantidade:'',
     produto: '',
     valorTotal: '',
@@ -96,7 +70,7 @@ export default class MenuCarrinho extends React.Component {
 
     if(produtoSelecionado.quantidade === 1){
 
-      const remocaoDeProduto = this.state.listaDeProdutos.filter(produtoAnalisado => {
+      const remocaoDeProduto = this.props.Produtos.filter(produtoAnalisado => {
 
         if ( produtoSelecionado.id !== produtoAnalisado.id ){
 
@@ -114,7 +88,7 @@ export default class MenuCarrinho extends React.Component {
 
     } else {
 
-      const listaDeProdutos = this.state.listaDeProdutos.map(produto => {
+      const listaDeProdutos = this.props.carrinho.map(produto => {
 
         if (produtoSelecionado.id === produto.id ){
     
@@ -143,7 +117,7 @@ export default class MenuCarrinho extends React.Component {
   };
   render() {
 
-    const produtosNoCarrinho = this.state.listaDeProdutos.map((produtos) =>{
+    const produtosNoCarrinho = this.props.carrinho.map((produtos) =>{
 
       return (
           
@@ -151,11 +125,11 @@ export default class MenuCarrinho extends React.Component {
 
           <p>{produtos.quantidade}x</p>
 
-          <p>{produtos.produto}</p>
+          <p>{produtos.name}</p>
 
           <BotaoRemover>
 
-              <button onClick={() => this.removerProduto(produtos)}>
+              <button onClick={() => this.removerProduto(this.props.carrinho)}>
 
               Remover
 
@@ -204,7 +178,7 @@ export default class MenuCarrinho extends React.Component {
           <ValorTotal>
 
             <p>Valor Total:</p>
-            <p>R${valorTotal(this.state.listaDeProdutos)}</p>
+            <p>R${valorTotal(this.props.carrinho)}</p>
 
           </ValorTotal>
 

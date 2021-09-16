@@ -23,15 +23,15 @@ export default class App extends React.Component {
         },
         {
         id: 2,
-        name: "Foguete da Missão Apollo 10",
+        name: "Foguete patriota",
         value: 1000.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        imageUrl: "https://pbs.twimg.com/media/E-tIYnDWEAgNjiK.jpg",
         },
         {
         id: 3,
-        name: "Foguete da Missão Apollo 12",
+        name: "Blue Origin",
         value: 100.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        imageUrl: "https://ichef.bbci.co.uk/news/640/cpsprodpb/13819/production/_118379897_blueorigin_ns12_liftoff.jpg",
         },
         {
         id: 4,
@@ -47,13 +47,33 @@ export default class App extends React.Component {
         },
     ],
 
-    carrinho:[
+    Carrinho:[
+      {
+        name: "foguete",
+        quantidade: "2",
+        valor: "2000"
+
+      },
+      {
+        name: "foguete2",
+        quantidade: "2",
+        valor: "2000"
+
+      },
+      {
+        name: "foguete3",
+        quantidade: "2",
+        valor: "2000"
+
+      },
+      
     ],
         busca: "",
         minPrice: "",
         maxPrice: "",
         parametroBusca: "price",
-        order: 1
+        order: 1,
+        carrinho: []
     };
 
     atualizaBusca = (evento) => {
@@ -79,6 +99,33 @@ export default class App extends React.Component {
           order: evento.target.value
       })
   }
+
+  adicionaAoCarrinho = (idParaAdicionar) => {
+    const itemCarrinho = this.state.Produtos.filter((idCadaProduto) => {
+      if (idParaAdicionar === idCadaProduto.id) {
+        return true;
+      } else {
+        return false;
+      }
+  
+    }) 
+    this.state.carrinho.push(itemCarrinho)
+    console.log(itemCarrinho)
+    console.log(this.state.carrinho)
+  }
+
+  // onClickRemoverPessoa = (indexParaRemover) => {
+  //   console.log("REMOVENDO", indexParaRemover);
+  //   const copiaPessoas = this.state.pessoas.filter(
+  //     (cadaPessoa, indexCadaPessoa) => {
+  //       if (indexParaRemover === indexCadaPessoa) {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //   );
+
   render() {
 
 
@@ -104,10 +151,15 @@ export default class App extends React.Component {
             busca = {this.state.busca}
             minPrice = {this.state.minPrice}
             maxPrice = {this.state.maxPrice}
+            adicionaAoCarrinho = {this.adicionaAoCarrinho}
           />
         </div>
         <div>
-          <MenuCarrinho />
+          <MenuCarrinho
+          carrinho = {this.state.Carrinho} 
+          // Produtos = {this.state.Produtos}
+
+          />
         </div>
       </ContainerGeral>
     );
