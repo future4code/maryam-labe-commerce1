@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
 const ContainerCarrinho = styled.div`
     display:flex;
     flex-direction: column;
@@ -80,46 +78,50 @@ export default class MenuCarrinho extends React.Component {
 
   };
 
-  listaDoCarrinho (produtosNoCarrinho) {
-    let tamanhoDoObjeto = produtosNoCarrinho.length
-    if (tamanhoDoObjeto === 0)
-    {
+  // listaDoCarrinho = (produtosNoCarrinho) => {
+  //   console.log(produtosNoCarrinho)
+  //   let tamanhoDoObjeto = produtosNoCarrinho.length
+  //   if (tamanhoDoObjeto === 0)
+  //   {
 
-        return (<CarrinhoVazio> O carrinho está vazio.</CarrinhoVazio>)
+  //       return (<CarrinhoVazio> O carrinho está vazio.</CarrinhoVazio>)
 
-    } else{
+  //   } else{
 
-      return produtosNoCarrinho
-    }}
+  //     return produtosNoCarrinho
+  // }}
+  //≈
 
+  // componentDidUpdate(){
+  //   componentDidUpdate(prevProps) {
+  //     if(prevProps.value !== this.props.value) {
+  //       this.setState({value: this.props.value});
+  //     }
+  //   // }
+  // }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.pokemons !== this.state.pokemons) {
+  //     console.log('pokemons state has changed.')
+  //   }
+  // }
+  
   render() {
 
-    const produtosNoCarrinho = this.props.carrinho.map((produtos) =>{
-
+    const produtosNoCarrinho = this.props.Carrinho.map((produtos) => {
       return (
-          
-        <ItemDaListaDeProdutos>
 
-          <p>{produtos.quantidade}x</p>
-
+        <ItemDaListaDeProdutos key={produtos.id}>
           <p>{produtos.name}</p>
-
           <BotaoRemover>
-
-              <button onClick={() => this.props.removerProduto(this.props.carrinho)}>
-
-              Remover
-
-              </button>
-
-
+              <button onClick={() => this.props.removerProduto(produtos)}>Remover</button>
           </BotaoRemover>
-
         </ItemDaListaDeProdutos>
       );
 
     })
 
+    
     return (
 
       <ContainerCarrinho>
@@ -127,14 +129,14 @@ export default class MenuCarrinho extends React.Component {
         <DisposicaoDaListaDeProdutos>
 
           <h1>Carrinho:</h1>
-          {this.listaDoCarrinho(produtosNoCarrinho)}
+          {produtosNoCarrinho}
 
         </DisposicaoDaListaDeProdutos>
 
           <ValorTotal>
 
             <p>Valor Total:</p>
-            <p>R${this.props.valorTotal(this.props.carrinho)}</p>
+            {/* <p>R${this.props.valorTotal(this.props.carrinho)}</p> */}
 
           </ValorTotal>
 

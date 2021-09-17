@@ -20,30 +20,35 @@ export default class App extends React.Component {
         name: "Foguete da Missão Apollo 11",
         value: 10000.0,
         imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        quantidade: 1
         },
         {
         id: 2,
         name: "Tie Fighter",
         value: 12000.0,
         imageUrl: "https://www.jing.fm/clipimg/detail/249-2498314_tie-fighter-star-wars-png-image-tie-fighter.png",
+        quantidade: 1
         },
         {
         id: 3,
         name: "Blue Origin",
         value: 100.0,
         imageUrl: "https://ichef.bbci.co.uk/news/640/cpsprodpb/13819/production/_118379897_blueorigin_ns12_liftoff.jpg",
+        quantidade: 1
         },
         {
         id: 4,
         name: "Millennium Falcon",
         value: 130000.0,
         imageUrl: "https://www.seekpng.com/png/detail/11-114257_falcon-falcon-star-war-ships-png.png",
+        quantidade: 1
         },
         {
         id: 5,
         name: "Falcon 9",
         value: 1.0,
         imageUrl: "https://i1.wp.com/tuataras.net/wp-content/uploads/cohetes-de-propulsion-externos-1-1024x683.jpg?resize=750,500&ssl=1",
+        quantidade: 1
         },
     ],
 
@@ -53,8 +58,7 @@ export default class App extends React.Component {
         parametroBusca: "price",
         order: 1,
         
-        carrinho: [
-
+        Carrinho: [
         ]
     };
 
@@ -84,24 +88,27 @@ export default class App extends React.Component {
 
 
   adicionaAoCarrinho = (item) => {
-    const copiaCarrinho = this.state.Produtos.filter((itemEscolhido) => {
+    const copiaCarrinho = [...this.state.Carrinho];
+    this.state.Produtos.filter((itemEscolhido) => {
       if (item === itemEscolhido) {
-        this.state.carrinho.push(item)
+        copiaCarrinho.push(item)
       } else {
         return false
       }
     })
-    console.log(this.state.carrinho)
+    this.setState({Carrinho: copiaCarrinho}) 
   }
 
 
-  removerProduto = (produtoSelecionado) => {
+  removerProduto = (item) => {
 
-    if(produtoSelecionado.quantidade === 1){
+    console.log(item.quantidade)
+    if(item.quantidade === 1){
+      console.log("removendo")
 
-      const remocaoDeProduto = this.state.Produtos.filter(produtoAnalisado => {
+      const remocaoDeProduto = this.state.Carrinho.filter(produtoAnalisado => {
 
-        if ( produtoSelecionado.id !== produtoAnalisado.id ){
+        if ( item.id !== produtoAnalisado.id ){
 
           return true
     
@@ -113,13 +120,13 @@ export default class App extends React.Component {
     
       })
     
-        this.setState({ carrinho: remocaoDeProduto })
+        this.setState({ Carrinho: remocaoDeProduto })
 
     } else {
+      console.log("Nao remove")
+      const listaDeProdutos = this.state.Carrinho.map(produto => {
 
-      const listaDeProdutos = this.state.carrinho.map(produto => {
-
-        if (produtoSelecionado.id === produto.id ){
+        if (item.id === produto.id ){
     
           const objetoSelecionado = {
     
@@ -139,33 +146,32 @@ export default class App extends React.Component {
     
       })
     
-        this.setState({ carrinho: listaDeProdutos })
+        this.setState({ Carrinho: listaDeProdutos })
     
   
   }
   }
 
-  valorTotal = (listaDeProdutos) => {
+  // valorTotal = (listaDeProdutos) => {
 
-    const valorTotalDosProdutos = listaDeProdutos.reduce(somaTotal, 0)
+  //   const valorTotalDosProdutos = listaDeProdutos.reduce(somaTotal, 0)
 
-    function somaTotal(total, item) {
+  //   function somaTotal(total, item) {
 
-      return total + (item.value * item.quantidade)
+  //     return total + (item.value * item.quantidade)
 
-     };
+  //    };
 
-     if (valorTotalDosProdutos === 0){
+  //    if (valorTotalDosProdutos === 0){
 
-      return "0.00"
+  //     return "0.00"
 
-     } else {
+  //    } else {
 
-     return valorTotalDosProdutos
+  //    return valorTotalDosProdutos
 
-    }
-  };
-
+  //   }
+  // };
 
 
   render() {
@@ -198,8 +204,9 @@ export default class App extends React.Component {
         </div>
         <div>
           <MenuCarrinho
-          carrinho = {this.state.carrinho} 
+          Carrinho = {this.state.Carrinho} 
           valorTotal = {this.valorTotal}
+          removerProduto = {this.removerProduto}
           // Produtos = {this.state.Produtos}
 
           />
