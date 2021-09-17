@@ -112,6 +112,7 @@ export default class MenuCarrinho extends React.Component {
       return (
 
         <ItemDaListaDeProdutos key={produtos.id}>
+          <p>{produtos.quantidade}x</p>
           <p>{produtos.name}</p>
           <BotaoRemover>
               <button onClick={() => this.props.removerProduto(produtos)}>Remover</button>

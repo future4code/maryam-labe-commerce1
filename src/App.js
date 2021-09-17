@@ -88,9 +88,11 @@ export default class App extends React.Component {
 
 
   adicionaAoCarrinho = (item) => {
+
     const copiaCarrinho = [...this.state.Carrinho];
     this.state.Produtos.filter((itemEscolhido) => {
       if (item === itemEscolhido) {
+        console.log("entro aqui", item)
         copiaCarrinho.push(item)
       } else {
         return false

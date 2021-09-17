@@ -93,7 +93,7 @@ export default class AreaProdutos extends React.Component {
       return (
         <ContainerProdutos>
             <Header>
-                <p>Quantidade dos Produtos: {this.props.produtos.length}</p>
+                <p>Quantidade dos Produtos: {componentes.length}</p>
                  <OrdenaPreço>
                     
                     <p>Preço: </p>
