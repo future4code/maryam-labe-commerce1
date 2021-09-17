@@ -17,37 +17,86 @@ export default class App extends React.Component {
     Produtos: [
         {
         id: 1,
-        name: "Foguete da Missão Apollo 11",
-        value: 10000.0,
+        name: "Apollo 11",
+        value: 1200000.0,
         imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
         quantidade: 1
         },
         {
         id: 2,
         name: "Tie Fighter",
-        value: 12000.0,
+        value: 1300000.0,
         imageUrl: "https://www.jing.fm/clipimg/detail/249-2498314_tie-fighter-star-wars-png-image-tie-fighter.png",
         quantidade: 1
         },
         {
         id: 3,
         name: "Blue Origin",
-        value: 100.0,
+        value: 9005000.0,
         imageUrl: "https://ichef.bbci.co.uk/news/640/cpsprodpb/13819/production/_118379897_blueorigin_ns12_liftoff.jpg",
         quantidade: 1
         },
         {
         id: 4,
         name: "Millennium Falcon",
-        value: 130000.0,
+        value: 13000000.0,
         imageUrl: "https://www.seekpng.com/png/detail/11-114257_falcon-falcon-star-war-ships-png.png",
         quantidade: 1
         },
         {
         id: 5,
         name: "Falcon 9",
-        value: 1.0,
+        value: 90000000.0,
         imageUrl: "https://i1.wp.com/tuataras.net/wp-content/uploads/cohetes-de-propulsion-externos-1-1024x683.jpg?resize=750,500&ssl=1",
+        quantidade: 1
+        },
+        {
+        id: 6,
+        name: "Apollo 13",
+        value: 800000.0,
+        imageUrl: "https://dicaappdodia.com/wp-content/uploads/2020/04/nasa-1.jpg",
+        quantidade: 1
+        },
+        {
+        id: 7,
+        name: "Enterprise",
+        value: 20000500.0,
+        imageUrl: "https://img.olhardigital.com.br/wp-content/uploads/2019/10/20191022062955.jpg",
+        quantidade: 1
+        },
+        {
+        id: 8,
+        name: "Destroyer",
+        value: 66000000.0,
+        imageUrl: "https://ecsmedia.pl/c/16195186897249046-png-gallery.big-iext70660636.jpg",
+        quantidade: 1
+        },
+        {
+        id: 9,
+        name: "Flying Saucers",
+        value: 15000.0,
+        imageUrl: "https://www.talkbass.com/attachments/killoftheday515-jpg.2017396/",
+        quantidade: 1
+        },
+        {
+        id: 10,
+        name: "Axion",
+        value: 30000500.0,
+        imageUrl: "https://super.abril.com.br/wp-content/uploads/2016/10/super_imgnave-axiom-filme-wall-e.jpg?quality=70&strip=info&w=550",
+        quantidade: 1
+        },
+        {
+        id: 11,
+        name: "Endurance",
+        value: 10000500.0,
+        imageUrl: "https://i.pinimg.com/originals/c5/59/40/c55940458550f0efc45a4928e6b3e8ef.jpg",
+        quantidade: 1
+        },
+        {
+        id: 12,
+        name: "R-1 IIIA-1",
+        value: 100500.0,
+        imageUrl: "https://ogimg.infoglobo.com.br/in/22017049-043-409/FT1086A/652/INFOCHPDPICT000041730665.jpg",
         quantidade: 1
         },
     ],
@@ -149,37 +198,25 @@ export default class App extends React.Component {
       })
     
         this.setState({ Carrinho: listaDeProdutos })
-    
-  
   }
   }
 
-  // valorTotal = (listaDeProdutos) => {
+  valorTotal = () => {
 
-  //   const valorTotalDosProdutos = listaDeProdutos.reduce(somaTotal, 0)
-
-  //   function somaTotal(total, item) {
-
-  //     return total + (item.value * item.quantidade)
-
-  //    };
-
-  //    if (valorTotalDosProdutos === 0){
-
-  //     return "0.00"
-
-  //    } else {
-
-  //    return valorTotalDosProdutos
-
-  //   }
-  // };
-
+    const copiaCarrinho = [...this.state.Carrinho]
+    const valorTotalDosProdutos = copiaCarrinho.reduce(somaTotal, 0)
+    function somaTotal(total, item) {
+      return total + (item.value * item.quantidade)
+     };
+     if (valorTotalDosProdutos === 0){
+      return "0.00"
+     } else {
+     return valorTotalDosProdutos
+    }
+  };
 
   render() {
 
-
-    
     return (
       <ContainerGeral>
         <div>
@@ -209,8 +246,6 @@ export default class App extends React.Component {
           Carrinho = {this.state.Carrinho} 
           valorTotal = {this.valorTotal}
           removerProduto = {this.removerProduto}
-          // Produtos = {this.state.Produtos}
-
           />
         </div>
       </ContainerGeral>

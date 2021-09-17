@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ContainerCarrinho = styled.div`
+max-height: 100vh;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -70,42 +71,6 @@ outline: 0;`
 
 export default class MenuCarrinho extends React.Component {
 
-  state = {
-
-    quantidade:'',
-    produto: '',
-    valorTotal: '',
-
-  };
-
-  // listaDoCarrinho = (produtosNoCarrinho) => {
-  //   console.log(produtosNoCarrinho)
-  //   let tamanhoDoObjeto = produtosNoCarrinho.length
-  //   if (tamanhoDoObjeto === 0)
-  //   {
-
-  //       return (<CarrinhoVazio> O carrinho está vazio.</CarrinhoVazio>)
-
-  //   } else{
-
-  //     return produtosNoCarrinho
-  // }}
-  //≈
-
-  // componentDidUpdate(){
-  //   componentDidUpdate(prevProps) {
-  //     if(prevProps.value !== this.props.value) {
-  //       this.setState({value: this.props.value});
-  //     }
-  //   // }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.pokemons !== this.state.pokemons) {
-  //     console.log('pokemons state has changed.')
-  //   }
-  // }
-  
   render() {
 
     const produtosNoCarrinho = this.props.Carrinho.map((produtos) => {
@@ -137,7 +102,7 @@ export default class MenuCarrinho extends React.Component {
           <ValorTotal>
 
             <p>Valor Total:</p>
-            {/* <p>R${this.props.valorTotal(this.props.carrinho)}</p> */}
+            <p>R${this.props.valorTotal(this.props.carrinho)}</p>
 
           </ValorTotal>
 
