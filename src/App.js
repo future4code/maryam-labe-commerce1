@@ -20,30 +20,35 @@ export default class App extends React.Component {
         name: "Foguete da Missão Apollo 11",
         value: 10000.0,
         imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        quantidade: 1
         },
         {
         id: 2,
-        name: "Foguete patriota",
-        value: 1000.0,
-        imageUrl: "https://pbs.twimg.com/media/E-tIYnDWEAgNjiK.jpg",
+        name: "Tie Fighter",
+        value: 12000.0,
+        imageUrl: "https://www.jing.fm/clipimg/detail/249-2498314_tie-fighter-star-wars-png-image-tie-fighter.png",
+        quantidade: 1
         },
         {
         id: 3,
         name: "Blue Origin",
         value: 100.0,
         imageUrl: "https://ichef.bbci.co.uk/news/640/cpsprodpb/13819/production/_118379897_blueorigin_ns12_liftoff.jpg",
+        quantidade: 1
         },
         {
         id: 4,
-        name: "Foguete da Missão Apollo 13",
-        value: 10.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        name: "Millennium Falcon",
+        value: 130000.0,
+        imageUrl: "https://www.seekpng.com/png/detail/11-114257_falcon-falcon-star-war-ships-png.png",
+        quantidade: 1
         },
         {
         id: 5,
-        name: "Foguete da Missão Apollo 14",
+        name: "Falcon 9",
         value: 1.0,
-        imageUrl: "https://static.todamateria.com.br/upload/ap/ol/apollo11decolando-cke.jpg",
+        imageUrl: "https://i1.wp.com/tuataras.net/wp-content/uploads/cohetes-de-propulsion-externos-1-1024x683.jpg?resize=750,500&ssl=1",
+        quantidade: 1
         },
     ],
 
@@ -52,7 +57,9 @@ export default class App extends React.Component {
         maxPrice: "",
         parametroBusca: "price",
         order: 1,
-        carrinho: []
+        
+        Carrinho: [
+        ]
     };
 
     atualizaBusca = (evento) => {
@@ -79,18 +86,95 @@ export default class App extends React.Component {
       })
   }
 
-  adicionaAoCarrinho = (idParaAdicionar) => {
-    const itemCarrinho = this.state.Produtos.filter((idCadaProduto) => {
-      if (idParaAdicionar === idCadaProduto.id) {
-        return true;
+
+  adicionaAoCarrinho = (item) => {
+
+    const copiaCarrinho = [...this.state.Carrinho];
+    this.state.Produtos.filter((itemEscolhido) => {
+      if (item === itemEscolhido) {
+        console.log("entro aqui", item)
+        copiaCarrinho.push(item)
       } else {
-        return false;
+        return false
       }
-  
-    }) 
-    this.state.carrinho.push(itemCarrinho)
-    console.log(this.state.carrinho)
+    })
+    this.setState({Carrinho: copiaCarrinho}) 
   }
+
+
+  removerProduto = (item) => {
+
+    console.log(item.quantidade)
+    if(item.quantidade === 1){
+      console.log("removendo")
+
+      const remocaoDeProduto = this.state.Carrinho.filter(produtoAnalisado => {
+
+        if ( item.id !== produtoAnalisado.id ){
+
+          return true
+    
+        } else {
+    
+          return false
+    
+        }
+    
+      })
+    
+        this.setState({ Carrinho: remocaoDeProduto })
+
+    } else {
+      console.log("Nao remove")
+      const listaDeProdutos = this.state.Carrinho.map(produto => {
+
+        if (item.id === produto.id ){
+    
+          const objetoSelecionado = {
+    
+            ...produto,
+    
+            quantidade: produto.quantidade - 1
+    
+          }
+    
+          return objetoSelecionado
+    
+        } else {
+    
+          return produto
+    
+        }
+    
+      })
+    
+        this.setState({ Carrinho: listaDeProdutos })
+    
+  
+  }
+  }
+
+  // valorTotal = (listaDeProdutos) => {
+
+  //   const valorTotalDosProdutos = listaDeProdutos.reduce(somaTotal, 0)
+
+  //   function somaTotal(total, item) {
+
+  //     return total + (item.value * item.quantidade)
+
+  //    };
+
+  //    if (valorTotalDosProdutos === 0){
+
+  //     return "0.00"
+
+  //    } else {
+
+  //    return valorTotalDosProdutos
+
+  //   }
+  // };
+
 
   render() {
 
@@ -122,7 +206,9 @@ export default class App extends React.Component {
         </div>
         <div>
           <MenuCarrinho
-          carrinho = {this.state.carrinho} 
+          Carrinho = {this.state.Carrinho} 
+          valorTotal = {this.valorTotal}
+          removerProduto = {this.removerProduto}
           // Produtos = {this.state.Produtos}
 
           />

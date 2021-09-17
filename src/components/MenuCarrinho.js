@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
 const ContainerCarrinho = styled.div`
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid black;
+    border: 1px #555;
+    background-color: #eee;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    border-radius: 10px;
     height: 80%;
     width: 300px;
     h1{
@@ -27,6 +28,12 @@ const DisposicaoDaListaDeProdutos = styled.div`
     flex-direction: column;
     `
 
+const CarrinhoVazio = styled.div`
+  margin: 0;
+  display: inline;
+  font-size: 24px;
+  padding: 16px;`
+
 const ItemDaListaDeProdutos= styled.div`
     display:flex;
     flex-direction: row;
@@ -44,7 +51,12 @@ const ValorTotal = styled.div`
 display: flex;
 justify-content: space-between;
 text-align: center;
-padding: 16px;`
+padding: 16px;
+p{
+  margin: 0;
+  display: inline;
+  font-size: 24px;
+}`
 
 const BotaoRemover = styled.div`
 width: 30%;
@@ -66,104 +78,51 @@ export default class MenuCarrinho extends React.Component {
 
   };
 
-  // removerProduto = (produtoSelecionado) => {
+  // listaDoCarrinho = (produtosNoCarrinho) => {
+  //   console.log(produtosNoCarrinho)
+  //   let tamanhoDoObjeto = produtosNoCarrinho.length
+  //   if (tamanhoDoObjeto === 0)
+  //   {
 
-  //   if(produtoSelecionado.quantidade === 1){
+  //       return (<CarrinhoVazio> O carrinho está vazio.</CarrinhoVazio>)
 
-  //     const remocaoDeProduto = this.props.Produtos.filter(produtoAnalisado => {
+  //   } else{
 
-  //       if ( produtoSelecionado.id !== produtoAnalisado.id ){
+  //     return produtosNoCarrinho
+  // }}
+  //≈
 
-  //         return true
-    
-  //       } else {
-    
-  //         return false
-    
-  //       }
-    
-  //     })
-    
-  //       this.setState({ this.props.carrinho: remocaoDeProduto })
-
-  //   } else {
-
-  //     const listaDeProdutos = this.props.carrinho.map(produto => {
-
-  //       if (produtoSelecionado.id === produto.id ){
-    
-  //         const objetoSelecionado = {
-    
-  //           ...produto,
-    
-  //           quantidade: produto.quantidade - 1
-    
-  //         }
-    
-  //         return objetoSelecionado
-    
-  //       } else {
-    
-  //         return produto
-    
-  //       }
-    
-  //     })
-    
-  //       this.setState({ carrinho: listaDeProdutos })
-    
+  // componentDidUpdate(){
+  //   componentDidUpdate(prevProps) {
+  //     if(prevProps.value !== this.props.value) {
+  //       this.setState({value: this.props.value});
+  //     }
+  //   // }
   // }
 
-  //};
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.pokemons !== this.state.pokemons) {
+  //     console.log('pokemons state has changed.')
+  //   }
+  // }
+  
   render() {
 
-    const produtosNoCarrinho = this.props.carrinho.map((produtos) =>{
-
+    const produtosNoCarrinho = this.props.Carrinho.map((produtos) => {
       return (
-          
-        <ItemDaListaDeProdutos>
 
-          {/* <p>{produtos.quantidade}x</p> */}
-
+        <ItemDaListaDeProdutos key={produtos.id}>
+          <p>{produtos.quantidade}x</p>
           <p>{produtos.name}</p>
-
           <BotaoRemover>
-
-              <button onClick={() => this.removerProduto(this.props.carrinho)}>
-
-              Remover
-
-              </button>
-
-
+              <button onClick={() => this.props.removerProduto(produtos)}>Remover</button>
           </BotaoRemover>
-
         </ItemDaListaDeProdutos>
       );
 
-    });
+    })
 
-    function valorTotal (listaDeProdutos) {
-
-    const valorTotal = listaDeProdutos.reduce(somaTotal, 0)
-
-    function somaTotal(total, item) {
-
-      return total + (item.valor * item.quantidade)
-
-     };
-
-     if (valorTotal === 0){
-
-      return "0.00"
-
-     } else{
-
-     return valorTotal
-
-    }
-    };
-
+    
     return (
 
       <ContainerCarrinho>
@@ -172,14 +131,13 @@ export default class MenuCarrinho extends React.Component {
 
           <h1>Carrinho:</h1>
           {produtosNoCarrinho}
-          <p>{this.props.carrinho.name}</p>
 
         </DisposicaoDaListaDeProdutos>
 
           <ValorTotal>
 
             <p>Valor Total:</p>
-            <p>R${valorTotal(this.props.carrinho)}</p>
+            {/* <p>R${this.props.valorTotal(this.props.carrinho)}</p> */}
 
           </ValorTotal>
 
