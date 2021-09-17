@@ -18,22 +18,22 @@ const ContainerFiltros = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 
   input {
     border-radius: 5px;
     border: none;
     height: 30px;
     margin-bottom: 20px;
+    width: 200px;
   }
-
 `
 
 export default class MenuFiltros extends React.Component {
   render() {
     return (
       <ContainerFiltros>
-      <h3>Filtros</h3>
-
+      <h1>Filtros</h1>
         <InputContainer>
           <p>Busca por nome:</p>
           <input
@@ -59,9 +59,6 @@ export default class MenuFiltros extends React.Component {
           onChange={this.props.atualizaPrecoMax}
           />    
         </InputContainer>
-          
-
-
       </ContainerFiltros>
     );
   }
