@@ -4,27 +4,64 @@ import styled from "styled-components";
 const ContainerProdutos = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 20px;
 `
 const Header = styled.header`
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const OrdenaPreço = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+        margin-right: 10px;
+    }
+
+    select {
+        border-radius: 5px;
+    }
+
 `
 
 const AreaDosProdutos = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
+    gap: 20px;
 `
 const ContainerProduto = styled.div`
     display: flex ;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px #555;
+    background-color: #eee;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
     align-items: center;
     padding-bottom: 10px;
+    border-radius: 10px;
+
+    button {
+        border:none;
+        border-radius: 5px;
+        background-color: darkgray;
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    button:hover {
+        color: white;
+    }
+
+    button:active {
+        color: lightgray
+    }
 `
 const ImagemDosProdutos = styled.img`
     width: 250px;
+    height: 200px;
 `
-
 export default class AreaProdutos extends React.Component {
 
 
@@ -48,7 +85,7 @@ export default class AreaProdutos extends React.Component {
                     <p>{item.name}</p>
                     <ImagemDosProdutos src={item.imageUrl} />
                     <p>R$ {item.value},00</p>
-                    <button onClick={()=> this.props.adicionaAoCarrinho(item.id)}>Adicionar ao Carrinho</button>
+                    <button onClick={()=> this.props.adicionaAoCarrinho(item)}>Adicionar ao Carrinho</button>
                 </ContainerProduto>
             )
         })
@@ -57,7 +94,7 @@ export default class AreaProdutos extends React.Component {
         <ContainerProdutos>
             <Header>
                 <p>Quantidade dos Produtos: {this.props.produtos.length}</p>
-                 <div>
+                 <OrdenaPreço>
                     
                     <p>Preço: </p>
                      <select
@@ -68,7 +105,7 @@ export default class AreaProdutos extends React.Component {
                         <option value={1}>Crescente</option>
                         <option value={-1}>Decrescente</option>
                     </select>
-                 </div>
+                 </OrdenaPreço>
             </Header>
             <AreaDosProdutos>
                 {componentes}
