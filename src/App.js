@@ -5,10 +5,45 @@ import AreaProdutos from './components/AreaProdutos';
 import MenuCarrinho from './components/MenuCarrinho';
 
 
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const ContainerGeral = styled.div`
-display: flex;
-padding: 16px;
-justify-content: space-between;
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+`
+
+const Footer = styled.footer`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+    bottom: 0;
+    display: absolute;
+    margin: 0 25%;
+
+    div {
+      align-items: center;
+    }
+
+    div > p {
+      text-align: center;
+      padding:0 10%
+    }
+
+    p > a {
+        text-decoration: none;
+        color: black;
+        font-weight: bolder;
+    }
+
+    a:hover {
+        color: gray;
+    }
 `
 
 export default class App extends React.Component {
@@ -191,37 +226,51 @@ export default class App extends React.Component {
   render() {
 
     return (
-      <ContainerGeral>
-        <div>
-          <MenuFiltros 
-            atualizaBusca = {this.atualizaBusca}
-            busca = {this.state.busca}
-            atualizaPrecoMin = {this.atualizaPrecoMin}
-            minPrice = {this.state.minPrice}
-            atualizaPrecoMax = {this.atualizaPrecoMax}
-            maxPrice = {this.state.maxPrice}
-          />
-        </div>
-        <div>
-          <AreaProdutos 
-            produtos = {this.state.Produtos}
-            atualizaOrdem = {this.atualizaOrdem}
-            parametroBusca = {this.state.parametroBusca}
-            order = {this.state.order}
-            busca = {this.state.busca}
-            minPrice = {this.state.minPrice}
-            maxPrice = {this.state.maxPrice}
-            adicionaAoCarrinho = {this.adicionaAoCarrinho}
-          />
-        </div>
-        <div>
-          <MenuCarrinho
-          Carrinho = {this.state.Carrinho} 
-          valorTotal = {this.valorTotal}
-          removerProduto = {this.removerProduto}
-          />
-        </div>
-      </ContainerGeral>
+      <Body>
+        <ContainerGeral>
+          <div>
+            <MenuFiltros 
+              atualizaBusca = {this.atualizaBusca}
+              busca = {this.state.busca}
+              atualizaPrecoMin = {this.atualizaPrecoMin}
+              minPrice = {this.state.minPrice}
+              atualizaPrecoMax = {this.atualizaPrecoMax}
+              maxPrice = {this.state.maxPrice}
+            />
+          </div>
+          <div>
+            <AreaProdutos 
+              produtos = {this.state.Produtos}
+              atualizaOrdem = {this.atualizaOrdem}
+              parametroBusca = {this.state.parametroBusca}
+              order = {this.state.order}
+              busca = {this.state.busca}
+              minPrice = {this.state.minPrice}
+              maxPrice = {this.state.maxPrice}
+              adicionaAoCarrinho = {this.adicionaAoCarrinho}
+            />
+          </div>
+          <div>
+            <MenuCarrinho
+            Carrinho = {this.state.Carrinho} 
+            valorTotal = {this.valorTotal}
+            removerProduto = {this.removerProduto}
+            />
+          </div>
+        </ContainerGeral>
+        <Footer>
+          <div>
+              <p>Site desenvolvido com React</p>
+              <p>Alunos da <a href="http://labenu.com.br" alt="site da Labenu" target="blank">Labenu</a> - turma Maryam</p>
+          </div>
+          <div>
+              <p><em>Projeto Desenvolvido em Agosto de 2021 por:</em></p>
+              <p><a href="https://github.com/allan-gilber" alt="GitHub do Allan" target="blank">Allan Gilber Martins</a></p>
+              <p><a href="https://www.linkedin.com/in/ericomarshall/" alt="Linkedin do Érico" target="blank">Érico Marshall</a></p>
+              <p><a href="https://www.linkedin.com/in/leonardo-camillo-9a5682191/" alt="GitHub do Leonardo" target="blank">Leonardo Camillo</a></p>
+          </div>
+        </Footer>
+      </Body>
     );
   }
 }

@@ -5,6 +5,7 @@ const ContainerProdutos = styled.div`
     display: flex;
     flex-direction: column;
     margin: 20px;
+    min-height: 80vh;
 `
 
 const NomeLoja = styled.div`
@@ -14,14 +15,14 @@ const NomeLoja = styled.div`
 
 const Header = styled.header`
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    min-width: 100%;
 `
 
 const OrdenaPreço = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 
     p {
         margin-right: 10px;
@@ -32,25 +33,6 @@ const OrdenaPreço = styled.div`
     }
 
 `
-const Footer = styled.footer`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    padding: 0 20px;
-    align-items: center;
-
-    p > a {
-        text-decoration: none;
-        color: black;
-        font-weight: bolder;
-    }
-
-    a:hover {
-        color: gray;
-    }
-
-`
-
 
 const AreaDosProdutos = styled.div`
     display: grid;
@@ -138,7 +120,8 @@ export default class AreaProdutos extends React.Component {
             <AreaDosProdutos>
                 {componentes}
             </AreaDosProdutos>
-                <Footer>
+
+                {/* <Footer>
                     <div>
                         <p>Site desenvolvido com React</p>
                         <p>Alunos da <a href="http://labenu.com.br" alt="site da Labenu" target="blank">Labenu</a> - turma Maryam</p>
@@ -149,8 +132,8 @@ export default class AreaProdutos extends React.Component {
                         <p><a href="https://www.linkedin.com/in/ericomarshall/" alt="Linkedin do Érico" target="blank">Érico Marshall</a></p>
                         <p><a href="https://www.linkedin.com/in/leonardo-camillo-9a5682191/" alt="GitHub do Leonardo" target="blank">Leonardo Camillo</a></p>
                     </div>
-                </Footer>
+                </Footer> */}
         </ContainerProdutos>
       );
-    }
+    }   
   } 

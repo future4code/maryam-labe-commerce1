@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const ContainerFiltros = styled.div`
   max-height: 100vh;
+  min-height: 80vh;
   height: 80%;
   width: 250px;
   display: flex ;
