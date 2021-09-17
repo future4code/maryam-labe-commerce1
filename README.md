@@ -22,4 +22,4 @@ Os dados não ficam salvos no site. Caso seja atualizado, os mesmos serão perdi
  
 ### Link para o site:
 
-http://http://hushed-tank.surge.sh
+http://hushed-tank.surge.sh
